@@ -1,4 +1,3 @@
 package com.example.hotel
 
-class HotelApplication {
-}
+class HotelApplication {}
