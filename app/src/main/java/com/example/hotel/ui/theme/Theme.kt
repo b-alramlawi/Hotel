@@ -42,7 +42,7 @@ fun HotelTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable 
 
     MaterialTheme(
         colors = colors,
-        typography = Typography,
+        typography = UrbanistTypography,
         shapes = Shapes,
         content = content
     )
