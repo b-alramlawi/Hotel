@@ -32,6 +32,17 @@ val Colors.textPrimaryColor: Color
 val Colors.textSecondaryColor: Color
     get() = if (isLight) Gray700 else Gray200
 
+val Colors.textThirdColor: Color
+    get() = Gray500
+
+val Colors.textForthColor: Color
+    get() = if (isLight) Green500 else White
+
+val Colors.textFifthColor: Color
+    get() = White
+
+val Colors.star: Color get() = Yellow500
+
 @Composable
 fun HotelTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
