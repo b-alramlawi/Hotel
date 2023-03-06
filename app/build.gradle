@@ -45,6 +45,15 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    configurations.all {
+        resolutionStrategy {
+            eachDependency {
+                if ((requested.group == "org.jetbrains.kotlin") && (requested.name.startsWith("kotlin-stdlib"))) {
+                    useVersion("1.8.0")
+                }
+            }
+        }
+    }
 }
 
 dependencies {
@@ -72,7 +81,7 @@ dependencies {
     //Navigation
     implementation "androidx.navigation:navigation-compose:2.5.3"
 
-    //Viewmodel
+    //ViewModel
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
 
     //Room database
@@ -101,7 +110,7 @@ dependencies {
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.28.0"
 
     //navigation-compose
-    implementation "androidx.navigation:navigation-compose:2.6.0-alpha05"
+//    implementation "androidx.navigation:navigation-compose:2.6.0-alpha05"
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
 
     //Paging
