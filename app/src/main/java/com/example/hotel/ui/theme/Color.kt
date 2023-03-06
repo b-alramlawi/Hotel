@@ -2,9 +2,10 @@ package com.example.hotel.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Green300 = Color(0xFF4ADE80)
+val Green300 = Color(0xFF53A777)
 val Green400 = Color(0xFFE8F8EF)
 val Green500 = Color(0xFF1ab65c)
+
 val Blue700 = Color(0xFF246BFD)
 val Yellow400 = Color(0xFFFACC15)
 val Yellow500 = Color(0xFFffd300)
