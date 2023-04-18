@@ -1,5 +1,6 @@
 package com.example.hotel.ui.composable
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.KeyboardActions
@@ -19,9 +20,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.hotel.R
+import com.example.hotel.ui.theme.Gray500
 import com.example.hotel.ui.theme.Shapes
 import com.example.hotel.ui.theme.textPrimaryColor
-import com.example.hotel.ui.theme.textThirdColor
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -29,7 +30,9 @@ fun SearchTextFiled(
     modifier: Modifier = Modifier,
     value: String,
     onFilterClick: () -> Unit,
-    onValueChange: (value: String) -> Unit
+    onSearchClick: () -> Unit = {},
+    onValueChange: (value: String) -> Unit,
+    enable: Boolean = true,
 ) {
     var isFocus by remember {
         mutableStateOf(false)
@@ -39,6 +42,7 @@ fun SearchTextFiled(
     OutlinedTextField(
         modifier = modifier
             .fillMaxWidth()
+            .clickable { onSearchClick() }
 //            .height(55.dp)
             .onFocusEvent { focusState ->
                 isFocus = focusState.isFocused
@@ -51,15 +55,19 @@ fun SearchTextFiled(
             disabledLabelColor = MaterialTheme.colors.onSecondary,
             focusedBorderColor = MaterialTheme.colors.primary,
             unfocusedBorderColor = Color.Transparent,
-            leadingIconColor = if (isFocus) MaterialTheme.colors.primary else MaterialTheme.colors.textThirdColor,
-            trailingIconColor = if (isFocus) MaterialTheme.colors.primary else MaterialTheme.colors.textThirdColor,
+            disabledBorderColor = Color.Transparent,
+            disabledLeadingIconColor = Gray500,
+            disabledTrailingIconColor = Gray500,
+            leadingIconColor = if (isFocus) MaterialTheme.colors.primary else Gray500,
+            trailingIconColor = if (isFocus) MaterialTheme.colors.primary else Gray500,
         ),
         shape = Shapes.medium,
+        enabled = enable,
         placeholder = {
             Text(
                 text = "Search",
                 style = MaterialTheme.typography.body2.copy(
-                    color = MaterialTheme.colors.textThirdColor,
+                    color = Gray500,
                     fontWeight = FontWeight.Normal
                 )
             )

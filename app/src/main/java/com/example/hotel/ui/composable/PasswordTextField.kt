@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -20,15 +21,14 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.hotel.R
-import com.example.hotel.ui.theme.Shapes
-import com.example.hotel.ui.theme.textPrimaryColor
-import com.example.hotel.ui.theme.textThirdColor
+import com.example.hotel.ui.theme.*
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun PasswordTextFiled(
     modifier: Modifier = Modifier,
     value: String,
+    label: Int = R.string.password,
     action: ImeAction = ImeAction.Next,
     onValueChange: (value: String) -> Unit
 ) {
@@ -38,12 +38,16 @@ fun PasswordTextFiled(
     var passwordVisible by remember {
         mutableStateOf(true)
     }
+    var passwordIcon by remember {
+        mutableStateOf(R.drawable.hide_bold)
+    }
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
+
     OutlinedTextField(
         modifier = modifier
             .fillMaxWidth()
-//            .height(58.dp)
+            .height(heightInput)
             .onFocusEvent { focusState ->
                 isFocus = focusState.isFocused
             },
@@ -55,15 +59,15 @@ fun PasswordTextFiled(
             disabledLabelColor = MaterialTheme.colors.onSecondary,
             focusedBorderColor = MaterialTheme.colors.primary,
             unfocusedBorderColor = Color.Transparent,
-            leadingIconColor = if (isFocus) MaterialTheme.colors.primary else MaterialTheme.colors.textThirdColor,
-            trailingIconColor = if (isFocus) MaterialTheme.colors.primary else MaterialTheme.colors.textThirdColor,
+            leadingIconColor = if (isFocus) MaterialTheme.colors.primary else Gray500,
+            trailingIconColor = if (isFocus) MaterialTheme.colors.primary else Gray500,
         ),
         shape = Shapes.medium,
         placeholder = {
             Text(
-                text = "Password",
+                text = if (isFocus) "" else stringResource(id = label),
                 style = MaterialTheme.typography.body2.copy(
-                    color = MaterialTheme.colors.textThirdColor,
+                    color = Gray500,
                     fontWeight = FontWeight.Normal
                 )
             )
@@ -77,9 +81,12 @@ fun PasswordTextFiled(
             )
         },
         trailingIcon = {
-            IconButton(onClick = { passwordVisible = !passwordVisible }) {
+            IconButton(onClick = {
+                passwordVisible = !passwordVisible
+                passwordIcon = if(passwordVisible) R.drawable.hide_bold else R.drawable.show_bold
+            }) {
                 Icon(
-                    painter = painterResource(id = R.drawable.hide_bold),
+                    painter = painterResource(id = passwordIcon),
                     contentDescription = "hide"
                 )
             }
@@ -92,6 +99,6 @@ fun PasswordTextFiled(
                 focusManager.clearFocus()
             }
         ),
-        visualTransformation = if(passwordVisible) PasswordVisualTransformation() else VisualTransformation.None
+        visualTransformation = if (passwordVisible) PasswordVisualTransformation() else VisualTransformation.None
     )
 }

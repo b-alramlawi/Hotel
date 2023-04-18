@@ -17,17 +17,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.example.hotel.ui.theme.Shapes
-import com.example.hotel.ui.theme.textPrimaryColor
-import com.example.hotel.ui.theme.textThirdColor
+import com.example.hotel.ui.theme.*
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun CustomTextFiled(
+fun InputTextFiled(
     modifier: Modifier = Modifier,
     leadingIcon: Int? = null,
+    trailingIcon: Int? = null,
     label: String,
     value: String,
+    enable: Boolean = true,
     keyboardType: KeyboardType = KeyboardType.Text,
     action: ImeAction = ImeAction.Next,
     onValueChange: (value: String) -> Unit
@@ -37,10 +37,11 @@ fun CustomTextFiled(
     }
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
+
     OutlinedTextField(
         modifier = modifier
             .fillMaxWidth()
-//            .height(58.dp)
+            .height(heightInput)
             .onFocusEvent { focusState ->
                 isFocus = focusState.isFocused
             },
@@ -52,23 +53,31 @@ fun CustomTextFiled(
             disabledLabelColor = MaterialTheme.colors.onSecondary,
             focusedBorderColor = MaterialTheme.colors.primary,
             unfocusedBorderColor = Color.Transparent,
-            leadingIconColor = if (isFocus) MaterialTheme.colors.primary else MaterialTheme.colors.textThirdColor,
-            trailingIconColor = if (isFocus) MaterialTheme.colors.primary else MaterialTheme.colors.textThirdColor,
+            leadingIconColor = if (isFocus) MaterialTheme.colors.primary else Gray500,
+            trailingIconColor = if (isFocus) MaterialTheme.colors.primary else Gray500,
         ),
         shape = Shapes.medium,
         placeholder = {
             Text(
-                text = label,
+                text = if (isFocus) "" else label,
                 style = MaterialTheme.typography.body2.copy(
-                    color = MaterialTheme.colors.textThirdColor,
+                    color = Gray500,
                     fontWeight = FontWeight.Normal
                 )
             )
         },
+        enabled = enable,
         singleLine = true,
         textStyle = MaterialTheme.typography.body2.copy(MaterialTheme.colors.textPrimaryColor),
-        leadingIcon = if (leadingIcon != null) {
+        leadingIcon =
+        if (leadingIcon != null) {
             { Icon(painter = painterResource(id = leadingIcon), contentDescription = "icon") }
+        } else {
+            null
+        },
+        trailingIcon =
+        if (trailingIcon != null) {
+            { Icon(painter = painterResource(id = trailingIcon), contentDescription = "icon") }
         } else {
             null
         },

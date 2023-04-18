@@ -23,7 +23,7 @@ fun CustomTag(title: String, color: Color) {
         shape = RoundedCornerShape(10.dp)
     ) {
         Text(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(horizontal = 15.dp, vertical = 5.dp),
             text = title,
             style = MaterialTheme.typography.button.copy(
                 color = color,

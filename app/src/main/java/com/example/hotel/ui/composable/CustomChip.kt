@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.hotel.ui.theme.White
 import com.example.hotel.ui.theme.textPrimaryColor
 
 @Composable
@@ -23,7 +24,7 @@ fun CustomChip(
 ) {
     Surface(
         color = if(selected) MaterialTheme.colors.primary else MaterialTheme.colors.background,
-        contentColor = if(selected) MaterialTheme.colors.background else MaterialTheme.colors.primary,
+        contentColor = if(selected) White else MaterialTheme.colors.primary,
         shape = CircleShape,
         border = BorderStroke(
             width = 1.dp,
@@ -33,8 +34,8 @@ fun CustomChip(
     ) {
         Text(
             text = text,
-            style = MaterialTheme.typography.body1.copy(fontWeight = FontWeight.SemiBold),
-            modifier = Modifier.padding(horizontal = 18.dp, vertical = 8.dp)
+            style = MaterialTheme.typography.body2,
+            modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)
         )
     }
 }

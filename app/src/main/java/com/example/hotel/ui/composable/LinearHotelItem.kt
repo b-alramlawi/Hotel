@@ -9,51 +9,49 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.node.modifierElementOf
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.hotel.R
-import com.example.hotel.ui.theme.star
-import com.example.hotel.ui.theme.textFifthColor
-import com.example.hotel.ui.theme.textPrimaryColor
-import com.example.hotel.ui.theme.textSecondaryColor
+import com.example.hotel.domain.model.Hotel
+import com.example.hotel.ui.theme.*
 
 @Composable
-fun LinearHotelItem() {
+fun LinearHotelItem(modifier: Modifier = Modifier, hotel: Hotel) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(110.dp)
+        modifier = modifier
+            .fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        elevation = 7.dp,
+        backgroundColor = MaterialTheme.colors.background
     ) {
-        Row(modifier = Modifier.padding(15.dp)) {
+        Row(modifier = Modifier.padding(16.dp)) {
             Card(
-                shape = RoundedCornerShape(10.dp),
+                shape = Shapes.medium,
                 elevation = 0.dp,
                 modifier = Modifier
-                    .fillMaxHeight()
-                    .fillMaxWidth(0.25f)
+                    .height(90.dp)
+                    .width(90.dp)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.hotel),
+                    painter = painterResource(id = hotel.image),
                     contentDescription = "hotel",
                     contentScale = ContentScale.Crop
                 )
             }
             Spacer(modifier = Modifier.width(15.dp))
             Column(
-                modifier = Modifier.fillMaxHeight().fillMaxWidth(0.7f),
+                modifier = Modifier.height(90.dp),
                 verticalArrangement = Arrangement.SpaceAround,
                 horizontalAlignment = Alignment.Start
             ) {
                 Text(
-                    text = "Emeralda De Hotel",
+                    text = hotel.name,
                     style = MaterialTheme.typography.h6.copy(MaterialTheme.colors.textPrimaryColor)
                 )
                 Text(
-                    text = "Paris, France",
+                    text = hotel.location,
                     style = MaterialTheme.typography.button.copy(
                         MaterialTheme.colors.textSecondaryColor,
                         fontWeight = FontWeight.Normal
@@ -69,7 +67,7 @@ fun LinearHotelItem() {
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = "4.5",
+                        text = hotel.rate.toString(),
                         style = MaterialTheme.typography.button.copy(
                             fontWeight = FontWeight.SemiBold,
                             color = MaterialTheme.colors.primary
@@ -85,19 +83,18 @@ fun LinearHotelItem() {
                     )
                 }
             }
-            Spacer(modifier = Modifier.width(15.dp))
             Column(
-                modifier = Modifier.fillMaxHeight().fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().height(90.dp),
                 verticalArrangement = Arrangement.SpaceAround,
                 horizontalAlignment = Alignment.End
             ) {
                 Text(
-                    text = "$29",
+                    text = hotel.price.toString() + "$",
                     style = MaterialTheme.typography.h4.copy(MaterialTheme.colors.primary)
                 )
                 Text(
                     text = "/ night",
-                    style = MaterialTheme.typography.overline.copy(
+                    style = MaterialTheme.typography.caption.copy(
                         MaterialTheme.colors.textSecondaryColor,
                         fontWeight = FontWeight.Normal
                     )
