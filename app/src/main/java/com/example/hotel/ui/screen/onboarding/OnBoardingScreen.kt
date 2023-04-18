@@ -61,7 +61,8 @@ fun OnBoardingContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colors.background)
+            .background(color = MaterialTheme.colors.background),
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
         HorizontalPager(
             count = state.pages.size,
@@ -79,27 +80,21 @@ fun OnBoardingContent(
                 currentPage = statePager.currentPage
             )
         }
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = horizontalSpacing, vertical = spacingLarge),
-            contentAlignment = Alignment.BottomCenter
+        Column(
+            modifier = Modifier.padding(horizontalSpacing),
+            verticalArrangement = Arrangement.spacedBy(spacingXSmall),
         ) {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(spacingXSmall),
-            ) {
+            CustomButton(
+                title = stringResource(id = R.string.next),
+                onClick = onNextClick
+            )
+            AnimatedVisibility(visible = statePager.currentPage != state.pages.size - 1) {
                 CustomButton(
-                    title = stringResource(id = R.string.next),
-                    onClick = onNextClick
+                    title = stringResource(id = R.string.skip),
+                    color = MaterialTheme.colors.secondary,
+                    textColor = MaterialTheme.colors.textForthColor,
+                    onClick = onSkipClick
                 )
-                AnimatedVisibility(visible = statePager.currentPage != state.pages.size - 1) {
-                    CustomButton(
-                        title = stringResource(id = R.string.skip),
-                        color = MaterialTheme.colors.secondary,
-                        textColor = MaterialTheme.colors.textForthColor,
-                        onClick = onSkipClick
-                    )
-                }
             }
         }
     }
