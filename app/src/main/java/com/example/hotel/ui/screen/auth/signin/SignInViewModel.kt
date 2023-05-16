@@ -34,4 +34,14 @@ class SignInViewModel @Inject constructor(): ViewModel() {
 
     }
 
+    fun onDismissRequest() {
+        _state.update { it.copy(dialogShowed = !_state.value.dialogShowed) }
+    }
+
+    fun onForgetPasswordClick() {
+        if(_state.value.email.contains("@")){
+            onDismissRequest()
+        }
+    }
+
 }

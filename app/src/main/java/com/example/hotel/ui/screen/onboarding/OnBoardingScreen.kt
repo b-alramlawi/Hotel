@@ -1,5 +1,8 @@
 package com.example.hotel.ui.screen.onboarding
 
+import android.app.Activity
+import android.content.Context
+import android.view.Window
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,7 +13,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
+import androidx.core.view.WindowCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.hotel.R
@@ -24,6 +33,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
@@ -35,10 +45,12 @@ fun OnBoardingScreen(
     val state by viewModel.state.collectAsState()
     val scope = rememberCoroutineScope()
     val statePager = rememberPagerState()
+    val paddingValues = WindowInsets.systemBars.asPaddingValues()
 
     OnBoardingContent(
         state = state,
         statePager = statePager,
+        paddingValues = paddingValues,
         onNextClick = {
             if (statePager.currentPage != state.pages.size - 1) {
                 scope.launch { statePager.animateScrollToPage(statePager.currentPage + 1) }
@@ -54,6 +66,7 @@ fun OnBoardingScreen(
 @Composable
 fun OnBoardingContent(
     state: OnBoardingUiState,
+    paddingValues: PaddingValues,
     statePager: PagerState,
     onNextClick: () -> Unit,
     onSkipClick: () -> Unit,
@@ -61,7 +74,8 @@ fun OnBoardingContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colors.background),
+            .background(color = MaterialTheme.colors.background)
+            .padding(bottom = paddingValues.calculateBottomPadding()),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         HorizontalPager(
@@ -81,7 +95,7 @@ fun OnBoardingContent(
             )
         }
         Column(
-            modifier = Modifier.padding(horizontalSpacing),
+            modifier = Modifier.padding(horizontal = horizontalSpacing, vertical = verticalSpacing),
             verticalArrangement = Arrangement.spacedBy(spacingXSmall),
         ) {
             CustomButton(

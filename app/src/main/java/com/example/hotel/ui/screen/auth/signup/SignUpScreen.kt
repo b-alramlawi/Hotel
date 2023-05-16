@@ -1,7 +1,5 @@
 package com.example.hotel.ui.screen.auth.signup
 
-import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -30,13 +28,9 @@ fun SignUpScreen(
     viewModel: SignUpViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    val scrollState = rememberScrollState()
-    val scaffoldState = rememberScaffoldState()
 
     SignUpContent(
         state = state,
-        scrollState = scrollState,
-        scaffoldState = scaffoldState,
         isSignUpEnable = viewModel.isSignUpEnable(),
         onChangeEmail = viewModel::onChangeEmail,
         onChangePassword = viewModel::onChangePassword,
@@ -56,8 +50,6 @@ fun SignUpScreen(
 @Composable
 fun SignUpContent(
     state: SignUpUiState,
-    scrollState: ScrollState,
-    scaffoldState: ScaffoldState,
     isSignUpEnable: Boolean,
     onChangeEmail: (String) -> Unit,
     onChangePassword: (String) -> Unit,
@@ -68,24 +60,32 @@ fun SignUpContent(
     onBackClick: () -> Unit,
 ) {
     Scaffold(
-        scaffoldState = scaffoldState,
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = MaterialTheme.colors.background),
+        scaffoldState = rememberScaffoldState(),
+        modifier = Modifier.padding(top = topPaddingValue(), bottom = bottomPaddingValue()),
         topBar = { DefaultAppBar(title = "", onBackClick = onBackClick) }
-    ) { padding ->
+    ) { paddingValue ->
         Column(
             modifier = Modifier
-                .padding(horizontal = horizontalSpacing)
                 .fillMaxSize()
-                .verticalScroll(scrollState),
+                .verticalScroll(rememberScrollState())
+                .padding(paddingValue),
             verticalArrangement = Arrangement.SpaceAround
         ) {
             Text(
+                modifier = Modifier.padding(
+                    horizontal = horizontalSpacing,
+                    vertical = verticalSpacing
+                ),
                 text = stringResource(id = R.string.create_your_account),
                 style = MaterialTheme.typography.h1.copy(color = MaterialTheme.colors.textPrimaryColor)
             )
-            Column(verticalArrangement = Arrangement.spacedBy(spacingXMedium)) {
+            Column(
+                modifier = Modifier.padding(
+                    horizontal = horizontalSpacing,
+                    vertical = verticalSpacing
+                ),
+                verticalArrangement = Arrangement.spacedBy(spacingXMedium)
+            ) {
                 InputTextFiled(
                     leadingIcon = R.drawable.message_bold,
                     label = stringResource(id = R.string.email),
@@ -108,7 +108,10 @@ fun SignUpContent(
             }
             Column(
                 verticalArrangement = Arrangement.spacedBy(spacingXMedium),
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.padding(
+                    horizontal = horizontalSpacing,
+                    vertical = verticalSpacing
+                ),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 DividerWithText()
@@ -120,6 +123,7 @@ fun SignUpContent(
                 )
             }
             Footer(
+                modifier = Modifier.padding(horizontal = horizontalSpacing),
                 message = stringResource(id = R.string.already_have_an_account),
                 textButton = stringResource(id = R.string.sign_in),
                 onClick = onSignInClick

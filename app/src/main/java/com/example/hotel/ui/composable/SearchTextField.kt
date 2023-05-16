@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.example.hotel.R
 import com.example.hotel.ui.theme.Gray500
 import com.example.hotel.ui.theme.Shapes
+import com.example.hotel.ui.theme.heightInput
 import com.example.hotel.ui.theme.textPrimaryColor
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -43,7 +44,7 @@ fun SearchTextFiled(
         modifier = modifier
             .fillMaxWidth()
             .clickable { onSearchClick() }
-//            .height(55.dp)
+            .height(heightInput)
             .onFocusEvent { focusState ->
                 isFocus = focusState.isFocused
             },

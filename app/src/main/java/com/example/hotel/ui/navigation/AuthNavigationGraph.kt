@@ -4,7 +4,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigation
 import com.example.hotel.ui.screen.auth.createnewpassword.createNewPasswordRoute
-import com.example.hotel.ui.screen.auth.forgotpassword.forgotPasswordRoute
 import com.example.hotel.ui.screen.auth.setupprofile.setupProfileRoute
 import com.example.hotel.ui.screen.auth.signin.signInRoute
 import com.example.hotel.ui.screen.auth.signup.signUpRoute
@@ -22,7 +21,6 @@ fun NavGraphBuilder.authNavigationGraph(
         signUpRoute(navController)
         setupProfileRoute(navController)
         signInRoute(navController)
-        forgotPasswordRoute(navController)
         createNewPasswordRoute(navController)
     }
 }

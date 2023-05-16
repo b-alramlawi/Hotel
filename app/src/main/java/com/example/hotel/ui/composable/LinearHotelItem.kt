@@ -11,24 +11,28 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.hotel.R
 import com.example.hotel.domain.model.Hotel
+import com.example.hotel.ui.composable.home.HotelRating
 import com.example.hotel.ui.theme.*
 
 @Composable
 fun LinearHotelItem(modifier: Modifier = Modifier, hotel: Hotel) {
     Card(
         modifier = modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .height(120.dp)
+            .padding(vertical = 5.dp),
         shape = RoundedCornerShape(16.dp),
-        elevation = 7.dp,
-        backgroundColor = MaterialTheme.colors.background
+        elevation = 0.dp,
+        backgroundColor = MaterialTheme.colors.cardBackground
     ) {
-        Row(modifier = Modifier.padding(16.dp)) {
+        Row(modifier = Modifier.padding(12.dp)) {
             Card(
-                shape = Shapes.medium,
+                shape = RoundedCornerShape(16.dp),
                 elevation = 0.dp,
                 modifier = Modifier
                     .height(90.dp)
@@ -42,7 +46,7 @@ fun LinearHotelItem(modifier: Modifier = Modifier, hotel: Hotel) {
             }
             Spacer(modifier = Modifier.width(15.dp))
             Column(
-                modifier = Modifier.height(90.dp),
+                modifier = Modifier.fillMaxHeight(),
                 verticalArrangement = Arrangement.SpaceAround,
                 horizontalAlignment = Alignment.Start
             ) {
@@ -57,34 +61,10 @@ fun LinearHotelItem(modifier: Modifier = Modifier, hotel: Hotel) {
                         fontWeight = FontWeight.Normal
                     )
                 )
-                // Rating
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        modifier = Modifier.size(20.dp),
-                        painter = painterResource(id = R.drawable.star_bold),
-                        contentDescription = "star",
-                        tint = MaterialTheme.colors.star,
-                    )
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Text(
-                        text = hotel.rate.toString(),
-                        style = MaterialTheme.typography.button.copy(
-                            fontWeight = FontWeight.SemiBold,
-                            color = MaterialTheme.colors.primary
-                        )
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = "(4,378 reviews)",
-                        style = MaterialTheme.typography.caption.copy(
-                            MaterialTheme.colors.textSecondaryColor,
-                            fontWeight = FontWeight.Normal
-                        )
-                    )
-                }
+                HotelRating(rate = hotel.rate, reviews = hotel.reviews)
             }
             Column(
-                modifier = Modifier.fillMaxWidth().height(90.dp),
+                modifier = Modifier.fillMaxWidth().fillMaxHeight(),
                 verticalArrangement = Arrangement.SpaceAround,
                 horizontalAlignment = Alignment.End
             ) {
@@ -93,7 +73,7 @@ fun LinearHotelItem(modifier: Modifier = Modifier, hotel: Hotel) {
                     style = MaterialTheme.typography.h4.copy(MaterialTheme.colors.primary)
                 )
                 Text(
-                    text = "/ night",
+                    text = stringResource(id = R.string.night),
                     style = MaterialTheme.typography.caption.copy(
                         MaterialTheme.colors.textSecondaryColor,
                         fontWeight = FontWeight.Normal

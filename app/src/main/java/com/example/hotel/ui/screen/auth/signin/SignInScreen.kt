@@ -1,7 +1,5 @@
 package com.example.hotel.ui.screen.auth.signin
 
-import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -17,9 +15,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.hotel.R
+import com.example.hotel.domain.model.DialogContent
 import com.example.hotel.ui.composable.*
 import com.example.hotel.ui.composable.auth.DividerWithText
-import com.example.hotel.ui.screen.auth.forgotpassword.navigateToForgotPassword
 import com.example.hotel.ui.screen.auth.signin.state.SignInUiState
 import com.example.hotel.ui.screen.auth.signup.navigateToSignUp
 import com.example.hotel.ui.screen.main.navigateToMain
@@ -28,13 +26,9 @@ import com.example.hotel.ui.theme.*
 @Composable
 fun SignInScreen(viewModel: SignInViewModel = hiltViewModel(), navController: NavController) {
     val state by viewModel.state.collectAsState()
-    val scrollState = rememberScrollState()
-    val scaffoldState = rememberScaffoldState()
 
     SignInContent(
         state = state,
-        scrollState = scrollState,
-        scaffoldState = scaffoldState,
         isSignInEnable = viewModel.isSignInEnable(),
         onChangeEmail = viewModel::onChangeEmail,
         onChangePassword = viewModel::onChangePassword,
@@ -42,16 +36,16 @@ fun SignInScreen(viewModel: SignInViewModel = hiltViewModel(), navController: Na
         onSignUpClick = { navController.navigateToSignUp() },
         onSignInClick = { navController.navigateToMain() },
         onGoogleClick = viewModel::onGoogleClick,
-        onForgotPasswordClick = { navController.navigateToForgotPassword() },
-        onBackClick = { navController.popBackStack() }
+        onForgotPasswordClick = viewModel::onForgetPasswordClick,
+        onBackClick = { navController.popBackStack() },
+        onDismissRequest = viewModel::onDismissRequest,
+        onGmailClick = {}
     )
 }
 
 @Composable
 fun SignInContent(
     state: SignInUiState,
-    scrollState: ScrollState,
-    scaffoldState: ScaffoldState,
     isSignInEnable: Boolean,
     onChangeEmail: (String) -> Unit,
     onChangePassword: (String) -> Unit,
@@ -61,26 +55,34 @@ fun SignInContent(
     onGoogleClick: () -> Unit,
     onForgotPasswordClick: () -> Unit,
     onBackClick: () -> Unit,
+    onGmailClick: () -> Unit,
+    onDismissRequest: () -> Unit,
 ) {
     Scaffold(
-        scaffoldState = scaffoldState,
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = MaterialTheme.colors.background),
+        scaffoldState = rememberScaffoldState(),
+        modifier = Modifier.padding(top = topPaddingValue(), bottom = bottomPaddingValue()),
         topBar = { DefaultAppBar(title = "", onBackClick = onBackClick) }
     ) { padding ->
         Column(
             modifier = Modifier
-                .padding(horizontal = horizontalSpacing)
                 .fillMaxSize()
-                .verticalScroll(scrollState),
+                .verticalScroll(rememberScrollState())
+                .padding(padding),
             verticalArrangement = Arrangement.SpaceAround
         ) {
             Text(
+                modifier = Modifier.padding(
+                    horizontal = horizontalSpacing,
+                    vertical = verticalSpacing
+                ),
                 text = stringResource(id = R.string.login_to_your_account),
                 style = MaterialTheme.typography.h1.copy(color = MaterialTheme.colors.textPrimaryColor)
             )
             Column(
+                modifier = Modifier.padding(
+                    horizontal = horizontalSpacing,
+                    vertical = verticalSpacing
+                ),
                 verticalArrangement = Arrangement.spacedBy(spacingXMedium),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -110,7 +112,10 @@ fun SignInContent(
             }
             Column(
                 verticalArrangement = Arrangement.spacedBy(spacingXMedium),
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.padding(
+                    horizontal = horizontalSpacing,
+                    vertical = verticalSpacing
+                ),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 DividerWithText()
@@ -122,10 +127,23 @@ fun SignInContent(
                 )
             }
             Footer(
+                modifier = Modifier.padding(horizontal = horizontalSpacing),
                 message = stringResource(id = R.string.dont_have_an_account),
                 textButton = stringResource(id = R.string.sign_up),
                 onClick = onSignUpClick
             )
+            if (state.dialogShowed) {
+                SuccessDialog(
+                    onDismissRequest = onDismissRequest,
+                    onActionClick = onGmailClick,
+                    dialogContent = DialogContent(
+                        image = R.drawable.success_booking,
+                        title = stringResource(id = R.string.check_your_email),
+                        subTitle = stringResource(id = R.string.we_have_sent_an_email_to_reset_your_password),
+                        actionTitle = stringResource(id = R.string.go_to_gmail),
+                    )
+                )
+            }
         }
     }
 }

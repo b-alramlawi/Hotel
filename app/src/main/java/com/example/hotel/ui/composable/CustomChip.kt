@@ -34,7 +34,7 @@ fun CustomChip(
     ) {
         Text(
             text = text,
-            style = MaterialTheme.typography.body2,
+            style = MaterialTheme.typography.body2.copy(color = if(selected) White else MaterialTheme.colors.primary),
             modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)
         )
     }

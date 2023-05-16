@@ -23,14 +23,18 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.hotel.R
+import com.example.hotel.domain.model.DialogContent
 import com.example.hotel.ui.composable.*
 import com.example.hotel.ui.screen.auth.createnewpassword.state.CreateNewPasswordUiState
 import com.example.hotel.ui.screen.auth.signin.navigateToSignIn
 import com.example.hotel.ui.theme.Green300
 import com.example.hotel.ui.theme.White
+import com.example.hotel.ui.theme.bottomPaddingValue
 import com.example.hotel.ui.theme.horizontalSpacing
 import com.example.hotel.ui.theme.spacingXMedium
 import com.example.hotel.ui.theme.textPrimaryColor
+import com.example.hotel.ui.theme.topPaddingValue
+import com.example.hotel.ui.theme.verticalSpacing
 
 @Composable
 fun CreateNewPasswordScreen(
@@ -38,13 +42,9 @@ fun CreateNewPasswordScreen(
     viewModel: CreateNewPasswordViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    val scaffoldState = rememberScaffoldState()
-    val scrollState = rememberScrollState()
 
     CreateNewPasswordContent(
         state = state,
-        scrollState = scrollState,
-        scaffoldState = scaffoldState,
         isContinueEnable = viewModel.isSignUpEnable(),
         onBackClick = { navController.popBackStack() },
         onContinueClick = viewModel::onContinueClick,
@@ -59,8 +59,6 @@ fun CreateNewPasswordScreen(
 @Composable
 fun CreateNewPasswordContent(
     state: CreateNewPasswordUiState,
-    scrollState: ScrollState,
-    scaffoldState: ScaffoldState,
     isContinueEnable: Boolean,
     onBackClick: () -> Unit,
     onContinueClick: () -> Unit,
@@ -71,10 +69,8 @@ fun CreateNewPasswordContent(
     onChangeRememberCheck: (Boolean) -> Unit,
 ) {
     Scaffold(
-        scaffoldState = scaffoldState,
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = MaterialTheme.colors.background),
+        scaffoldState = rememberScaffoldState(),
+        modifier = Modifier.padding(top = topPaddingValue(), bottom = bottomPaddingValue()),
         topBar = {
             DefaultAppBar(
                 title = stringResource(id = R.string.create_new_password),
@@ -86,14 +82,14 @@ fun CreateNewPasswordContent(
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .padding(horizontalSpacing)
                 .fillMaxSize()
-                .verticalScroll(scrollState)
+                .verticalScroll(rememberScrollState())
+                .padding(padding),
         ) {
             Box(
                 modifier = Modifier
-                    .width(300.dp)
-                    .height(300.dp),
+                    .fillMaxWidth(0.8f)
+                    .fillMaxHeight(0.4f),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
@@ -103,7 +99,13 @@ fun CreateNewPasswordContent(
                     modifier = Modifier.fillMaxSize()
                 )
             }
-            Column(verticalArrangement = Arrangement.spacedBy(spacingXMedium)) {
+            Column(
+                modifier = Modifier.padding(
+                    horizontal = horizontalSpacing,
+                    vertical = verticalSpacing
+                ),
+                verticalArrangement = Arrangement.spacedBy(spacingXMedium)
+            ) {
                 Text(
                     text = stringResource(id = R.string.create_new_password),
                     style = MaterialTheme.typography.body2.copy(color = MaterialTheme.colors.textPrimaryColor)
@@ -134,7 +136,13 @@ fun CreateNewPasswordContent(
             if (state.dialogShowed) {
                 SuccessDialog(
                     onDismissRequest = onDismissRequest,
-                    onGoToLoginClick = onGoToLoginClick,
+                    onActionClick = onGoToLoginClick,
+                    dialogContent = DialogContent(
+                        image = R.drawable.success_booking,
+                        title = stringResource(id = R.string.congratulations),
+                        subTitle = stringResource(id = R.string.your_account_is_ready_to_use),
+                        actionTitle = stringResource(id = R.string.go_to_sign_in),
+                    )
                 )
             }
         }

@@ -1,12 +1,20 @@
 package com.example.hotel.ui.theme
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val DarkColorPalette = darkColors(
@@ -38,11 +46,11 @@ val Colors.textSecondaryColor: Color
 val Colors.textThirdColor: Color
     get() = if (isLight) Gray700 else Gray400
 
-//val Colors.textThirdColor: Color
-//    get() = Gray500
-
 val Colors.textForthColor: Color
     get() = if (isLight) Green500 else White
+
+val Colors.cardBackground: Color
+    get() = if (isLight) Gray50 else Blake901
 
 val Colors.textFifthColor: Color
     get() = White
@@ -59,7 +67,7 @@ fun HotelTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable 
 
     val systemUiController = rememberSystemUiController()
     systemUiController.setSystemBarsColor(
-        color = colors.background,
+        color = Color.Transparent,
         darkIcons = !darkTheme
     )
 

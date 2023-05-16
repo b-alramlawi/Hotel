@@ -5,5 +5,6 @@ data class Hotel(
     val rate: Float,
     val name: String,
     val location: String,
-    val price: Double
+    val price: Double,
+    val reviews: Int = 0
 )

@@ -1,9 +1,6 @@
 package com.example.hotel.ui.screen.auth.setupprofile
 
-import android.content.Context
 import android.net.Uri
-import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -22,11 +19,12 @@ import com.example.hotel.domain.model.Gender
 import com.example.hotel.ui.composable.*
 import com.example.hotel.ui.screen.auth.setupprofile.state.SetUpProfileUiState
 import com.example.hotel.ui.screen.main.navigateToMain
+import com.example.hotel.ui.theme.bottomPaddingValue
 import com.example.hotel.ui.theme.horizontalSpacing
-import com.example.hotel.ui.theme.spacingLarge
-import kotlinx.coroutines.CoroutineScope
+import com.example.hotel.ui.theme.spacingXMedium
+import com.example.hotel.ui.theme.topPaddingValue
+import com.example.hotel.ui.theme.verticalSpacing
 import kotlinx.coroutines.launch
-import okhttp3.MultipartBody
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -38,28 +36,24 @@ fun SetupProfileScreen(
 ) {
     val state by viewModel.state.collectAsState()
     val coroutineScope = rememberCoroutineScope()
-    val scaffoldState = rememberScaffoldState()
-    val scrollState = rememberScrollState()
     val modalSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
-    val context = LocalContext.current
 
     SetupProfileContent(
-        scrollState = scrollState,
         modalSheetState = modalSheetState,
-        scaffoldState = scaffoldState,
-        coroutineScope = coroutineScope,
         state = state,
-        context = context,
         genders = viewModel.genders,
         onChangeFirstName = viewModel::onChangeFirstName,
         isContinueButtonEnable = viewModel.isContinueButtonEnable(),
         onChangeLastName = viewModel::onChangeLastName,
-        onChangeFile = viewModel::onChangeFile,
         onChangeImage = viewModel::onChangeImage,
         onChangeBirthdate = viewModel::onChangeBirthdate,
         onChangePhoneNumber = viewModel::onChangePhoneNumber,
         onChangeGender = viewModel::onChangeGender,
-        onSelectedGenderChange = viewModel::onChangeGender,
+        onSelectedGenderChange = {
+            viewModel.onChangeGender(it)
+            coroutineScope.launch { modalSheetState.hide() }
+        },
+        onSelectGenderClick = { coroutineScope.launch { modalSheetState.show() } },
         onBackClick = { navController.popBackStack() },
         onContinueClick = { navController.navigateToMain() }
     )
@@ -69,21 +63,17 @@ fun SetupProfileScreen(
 @Composable
 fun SetupProfileContent(
     state: SetUpProfileUiState,
-    scrollState: ScrollState,
-    scaffoldState: ScaffoldState,
     modalSheetState: ModalBottomSheetState,
-    context: Context,
     isContinueButtonEnable: Boolean,
-    coroutineScope: CoroutineScope,
     genders: ArrayList<Gender>,
     onChangeFirstName: (String) -> Unit,
-    onChangeFile: (MultipartBody.Part) -> Unit,
     onChangeImage: (Uri) -> Unit,
     onChangeLastName: (String) -> Unit,
     onChangeBirthdate: (String) -> Unit,
     onChangePhoneNumber: (String) -> Unit,
     onChangeGender: (String) -> Unit,
     onSelectedGenderChange: (String) -> Unit,
+    onSelectGenderClick: () -> Unit,
     onBackClick: () -> Unit,
     onContinueClick: () -> Unit
 ) {
@@ -93,35 +83,39 @@ fun SetupProfileContent(
             GenderBottomSheet(
                 value = state.gender,
                 genders = genders,
-                onSelectedChange = {
-                    onSelectedGenderChange(it)
-                    coroutineScope.launch { modalSheetState.hide() }
-                }
+                onSelectedChange = onSelectedGenderChange
             )
         },
         screenContent = {
             Scaffold(
-                scaffoldState = scaffoldState,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(color = MaterialTheme.colors.background),
-                topBar = { DefaultAppBar(title = stringResource(id = R.string.fill_your_profile), onBackClick = onBackClick) }
+                scaffoldState = rememberScaffoldState(),
+                modifier = Modifier.padding(top = topPaddingValue(), bottom = bottomPaddingValue()),
+                topBar = {
+                    DefaultAppBar(
+                        title = stringResource(id = R.string.fill_your_profile),
+                        onBackClick = onBackClick
+                    )
+                }
             ) { padding ->
-                Box(
+                Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .verticalScroll(scrollState)
-                        .padding(horizontalSpacing)
+                        .verticalScroll(rememberScrollState())
+                        .padding(padding),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceBetween
                 ) {
                     Column(
+                        modifier = Modifier.padding(
+                            horizontal = horizontalSpacing,
+                            vertical = verticalSpacing
+                        ),
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(spacingLarge)
+                        verticalArrangement = Arrangement.spacedBy(spacingXMedium)
                     ) {
                         ProfilePicture(
-                            context = context,
                             url = state.profilePicture,
                             onImageChange = onChangeImage,
-                            onFileChange = onChangeFile
                         )
                         Row(horizontalArrangement = Arrangement.spacedBy(15.dp)) {
                             InputTextFiled(
@@ -139,7 +133,7 @@ fun SetupProfileContent(
                         CalendarTextFiled(
                             value = state.birthdate,
                             onValueChange = onChangeBirthdate,
-                            context = context
+                            context = LocalContext.current
                         )
                         PhoneNumberTextFiled(
                             value = state.phoneNumber,
@@ -149,11 +143,14 @@ fun SetupProfileContent(
                         GenderTextFiled(
                             value = state.gender,
                             onValueChange = onChangeGender,
-                            onSelectGenderClick = { coroutineScope.launch { modalSheetState.show() } }
+                            onSelectGenderClick = onSelectGenderClick
                         )
                     }
                     CustomButton(
-                        modifier = Modifier.align(Alignment.BottomCenter),
+                        modifier = Modifier.padding(
+                            horizontal = horizontalSpacing,
+                            vertical = verticalSpacing
+                        ),
                         title = stringResource(id = R.string.contenue),
                         onClick = onContinueClick,
                         enabled = isContinueButtonEnable,

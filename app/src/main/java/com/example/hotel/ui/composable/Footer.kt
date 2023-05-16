@@ -15,10 +15,10 @@ import com.example.hotel.R
 import com.example.hotel.ui.theme.textSecondaryColor
 
 @Composable
-fun Footer(message: String, textButton: String, onClick: () -> Unit){
+fun Footer(modifier: Modifier = Modifier, message: String, textButton: String, onClick: () -> Unit){
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center
     ) {
         Text(
@@ -28,14 +28,6 @@ fun Footer(message: String, textButton: String, onClick: () -> Unit){
                 fontWeight = FontWeight.Normal
             )
         )
-        TextButton(onClick = onClick) {
-            Text(
-                text = textButton,
-                style = MaterialTheme.typography.button.copy(
-                    color = MaterialTheme.colors.primary,
-                    fontWeight = FontWeight.SemiBold
-                )
-            )
-        }
+        CustomTextButton(title = textButton, onClick = onClick)
     }
 }

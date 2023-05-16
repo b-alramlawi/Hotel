@@ -10,6 +10,7 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="sign_in">Sign In</string>
     <string name="go_to_sign_in">Go to Sign In</string>
+    <string name="go_to_gmail">Go to Gmail</string>
     <string name="fill_your_profile">Fill Your Profile</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
@@ -28,7 +29,9 @@
     <string name="create_new_password">Create New Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="congratulations">Congratulations!</string>
+    <string name="check_your_email">Check Your Email!</string>
     <string name="your_account_is_ready_to_use">Your account is ready to use!</string>
+    <string name="we_have_sent_an_email_to_reset_your_password">We have sent an email to reset your password</string>
     <string name="next">Next</string>
     <string name="get_started">Get Started</string>
     <string name="skip">Skip</string>
@@ -50,7 +53,8 @@
     <string name="logout">Logout</string>
     <string name="profile">Profile</string>
     <string name="chat">Chat</string>
-    <string name="booking">My Booking</string>
+    <string name="my_booking">My Booking</string>
+    <string name="booking">Booking</string>
     <string name="home">Home</string>
     <string name="recently_booked">Recently Booked</string>
     <string name="details">Details</string>
@@ -64,6 +68,8 @@
     <string name="facilities">Facilities</string>
     <string name="apply_filter">Apply Filter</string>
     <string name="cancel">Cancel</string>
+    <string name="night">/ night</string>
+    <string name="reviews">reviews</string>
     <string name="on_boarding_1_title">Travel safely, comfortably, and easily</string>
     <string name="on_boarding_2_title">Find the best hotels for your vacation</string>
     <string name="on_boarding_3_title">Let’s discover the world with us</string>
