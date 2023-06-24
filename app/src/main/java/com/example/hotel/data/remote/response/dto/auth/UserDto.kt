@@ -16,7 +16,7 @@ data class UserDto(
     @SerializedName("id")
     val id: Int,
     @SerializedName("image")
-    val image: String,
+    val image: String?,
     @SerializedName("last_name")
     val lastName: String,
     @SerializedName("phone_number")

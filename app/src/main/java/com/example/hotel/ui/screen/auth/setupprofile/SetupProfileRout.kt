@@ -21,7 +21,7 @@ fun NavGraphBuilder.setupProfileRoute(navController: NavController) {
             navArgument(name = SetupProfileScreenArgs.PASSWORD) { NavType.StringType },
         )
     ) {
-        SetupProfileScreen(navController = navController)
+        SetupProfileScreen(navController = navController, arguments = it.arguments!!)
     }
 }
 

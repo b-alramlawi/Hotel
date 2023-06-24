@@ -20,7 +20,7 @@ fun CustomButton(
     textColor: Color = White,
     disableColor: Color = Green300,
     enabled: Boolean = true,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Button(
         onClick = onClick,

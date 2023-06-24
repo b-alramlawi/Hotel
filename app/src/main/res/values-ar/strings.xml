@@ -35,6 +35,7 @@
     <string name="on_boarding_3_title">دعونا نكتشف العالم معنا</string>
     <string name="get_started">ابدا الان</string>
     <string name="loading">جاري التحميل...</string>
+    <string name="error">حدث خطا ما</string>
     <string name="recommended">ينصح به</string>
     <string name="popular">المشهور</string>
     <string name="nearby">بالقرب مني</string>
@@ -53,7 +54,7 @@
     <string name="logout">تسجيل الخروج</string>
     <string name="profile">الصفحة الشخصية</string>
     <string name="chat">الدردشة</string>
-    <string name="booking">حجوزاتي</string>
+    <string name="booking">الحجوزات</string>
     <string name="home">الرئيسية</string>
     <string name="recently_booked">حجوزاتي السابقة</string>
     <string name="see_all">اعرض الكل</string>
@@ -68,6 +69,12 @@
     <string name="apply_filter">تطبيق</string>
     <string name="cancel">الغاء</string>
     <string name="book_mark">المحفوظات</string>
+    <string name="go_to_gmail">اذهب للبريد اللكتروني</string>
+    <string name="check_your_email">افحص بريدك اللكتروني</string>
+    <string name="night">/ لليلة</string>
+    <string name="reviews">تقييم</string>
+    <string name="my_booking">حجوزاتي</string>
+    <string name="we_have_sent_an_email_to_reset_your_password">لقد ارسلنا لك بريد اللكترني لستعادة كلمة السر</string>
     <string name="on_boarding_1_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="on_boarding_2_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="on_boarding_3_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>

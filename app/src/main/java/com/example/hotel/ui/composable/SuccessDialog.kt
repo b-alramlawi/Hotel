@@ -1,9 +1,8 @@
 package com.example.hotel.ui.composable
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -11,19 +10,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.example.hotel.R
+import com.example.hotel.domain.model.DialogContent
+import com.example.hotel.ui.theme.spacingHuge
+import com.example.hotel.ui.theme.spacingMedium
 import com.example.hotel.ui.theme.textFifthColor
-import com.example.hotel.ui.theme.textForthColor
-import com.example.hotel.ui.theme.textPrimaryColor
 import com.example.hotel.ui.theme.textSecondaryColor
 
 @Composable
-fun SuccessDialog(onDismissRequest: () -> Unit, onGoToLoginClick: () -> Unit) {
+fun SuccessDialog(
+    dialogContent: DialogContent,
+    onDismissRequest: () -> Unit,
+    onActionClick: () -> Unit
+) {
     Dialog(
         onDismissRequest = onDismissRequest,
         properties = DialogProperties(
@@ -34,31 +37,35 @@ fun SuccessDialog(onDismissRequest: () -> Unit, onGoToLoginClick: () -> Unit) {
         Card(backgroundColor = MaterialTheme.colors.background, shape = RoundedCornerShape(24.dp)) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(32.dp)
+                modifier = Modifier.padding(spacingHuge),
+                verticalArrangement = Arrangement.spacedBy(spacingHuge)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.success_booking),
-                    contentDescription = "success_booking"
+                    painter = painterResource(id = dialogContent.image),
+                    contentDescription = "image"
                 )
-                Spacer(modifier = Modifier.height(32.dp))
-                Text(
-                    text = stringResource(id = R.string.congratulations),
-                    style = MaterialTheme.typography.h4.copy(color = MaterialTheme.colors.primary)
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = stringResource(id = R.string.your_account_is_ready_to_use),
-                    style = MaterialTheme.typography.body2.copy(
-                        color = MaterialTheme.colors.textSecondaryColor,
-                        fontWeight = FontWeight.Normal
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(spacingMedium)
+                ) {
+                    Text(
+                        text = dialogContent.title,
+                        style = MaterialTheme.typography.h4.copy(color = MaterialTheme.colors.primary, textAlign = TextAlign.Center)
                     )
-                )
-                Spacer(modifier = Modifier.height(32.dp))
+                    Text(
+                        text = dialogContent.subTitle,
+                        style = MaterialTheme.typography.body2.copy(
+                            color = MaterialTheme.colors.textSecondaryColor,
+                            fontWeight = FontWeight.Normal,
+                            textAlign = TextAlign.Center
+                        )
+                    )
+                }
                 CustomButton(
-                    title = stringResource(id = R.string.go_to_sign_in),
+                    title = dialogContent.actionTitle,
                     color = MaterialTheme.colors.primary,
                     textColor = MaterialTheme.colors.textFifthColor,
-                    onClick = onGoToLoginClick
+                    onClick = onActionClick
                 )
             }
         }

@@ -4,13 +4,15 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.hotel.R
-import com.example.hotel.ui.composable.HomeAppBar
 import com.example.hotel.ui.composable.ProfilePicture
 import com.example.hotel.ui.composable.SettingItem
 import com.example.hotel.ui.theme.Red500
@@ -19,39 +21,35 @@ import com.example.hotel.ui.theme.textPrimaryColor
 @Composable
 fun ProfileScreen(
     navController: NavController,
+    viewModel: ProfileViewModel = hiltViewModel()
 ) {
-    ProfileContent(
-        navController = navController,
-    )
-}
+    val state by viewModel.state.collectAsState()
 
-@Composable
-private fun ProfileContent(
-    navController: NavController,
-) {
     Column(verticalArrangement = Arrangement.spacedBy(15.dp)) {
-        HomeAppBar(
-            title = stringResource(id = R.string.profile),
+        LazyColumn(
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-
-        }
-
-        LazyColumn(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(24.dp)) {
             item {
-                Column(verticalArrangement = Arrangement.spacedBy(8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-//                    ProfilePicture(url = "https://icon-library.com/images/icon-of-a-person/icon-of-a-person-7.jpg") {
-//
-//                    }
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    ProfilePicture(
+                        url = state.image,
+                        onImageChange = viewModel::onChangeImage,
+                    )
                     Text(
-                        text = "Samer Mushtaha",
+                        text = state.name,
                         style = MaterialTheme.typography.h5.copy(color = MaterialTheme.colors.textPrimaryColor)
                     )
                     Text(
-                        text = "samermushtaha0@gmail.com",
+                        text = state.email,
                         style = MaterialTheme.typography.button.copy(color = MaterialTheme.colors.textPrimaryColor)
                     )
                 }
+
                 Spacer(modifier = Modifier.height(24.dp))
+
                 Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
                     Divider()
                     SettingItem(

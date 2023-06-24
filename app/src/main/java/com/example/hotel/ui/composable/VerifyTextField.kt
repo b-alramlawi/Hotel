@@ -31,7 +31,8 @@ fun VerificationCode(
     modifier: Modifier = Modifier,
     value: String,
     otpCount: Int = 4,
-    onValueChange: (String) -> Unit
+    onValueChange: (String) -> Unit,
+    isError: Boolean
 ) {
     var isFocus by remember {
         mutableStateOf(false)
@@ -57,7 +58,8 @@ fun VerificationCode(
                     CharView(
                         index = index,
                         text = value,
-                        isFocus = isFocus
+                        isFocus = isFocus,
+                        isError = isError
                     )
                 }
             }
@@ -69,7 +71,8 @@ fun VerificationCode(
 private fun CharView(
     index: Int,
     text: String,
-    isFocus: Boolean
+    isFocus: Boolean,
+    isError: Boolean
 ) {
     val isFocused = text.length == index && isFocus
     val char = when {
@@ -85,6 +88,7 @@ private fun CharView(
             .border(
                 1.dp, when {
                     isFocused -> MaterialTheme.colors.primary
+                    isError -> Color.Red
                     else -> MaterialTheme.colors.onSecondary
                 }, RoundedCornerShape(12.dp)
             )

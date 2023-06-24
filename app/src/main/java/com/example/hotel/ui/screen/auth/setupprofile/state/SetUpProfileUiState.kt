@@ -9,6 +9,7 @@ data class SetUpProfileUiState(
  var birthdate: String = "",
  val phoneNumber: String = "",
  val profilePicture: Any = "https://icon-library.com/images/icon-of-a-person/icon-of-a-person-7.jpg",
+ val path: String = "",
  val gender: String = "",
  val btnTitle:Int = R.string.contenue,
  val btnEnable: Boolean = false,

@@ -10,6 +10,5 @@ data class ParamSignUpDto(
     val phoneNumber: String,
     val gender: String,
     val birthDate: String,
-    val image: MultipartBody.Part,
     val password: String
 )

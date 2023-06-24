@@ -72,7 +72,7 @@ fun showDatePickerDialog(context: Context, onValueChange: (String) -> Unit) {
     DatePickerDialog(
         context,
         { _, selectedYear: Int, selectedMonth: Int, selectedDay: Int ->
-            onValueChange("$selectedDay/${selectedMonth + 1}/$selectedYear")
+            onValueChange("$selectedYear-${selectedMonth + 1}-$selectedDay")
         },
         currentYear, currentMonth, currentDay
     ).show()

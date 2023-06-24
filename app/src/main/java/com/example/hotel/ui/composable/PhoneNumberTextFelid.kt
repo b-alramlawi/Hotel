@@ -62,7 +62,6 @@ fun PhoneNumberTextFiled(
         },
         singleLine = true,
         textStyle = MaterialTheme.typography.body2.copy(MaterialTheme.colors.textPrimaryColor),
-        leadingIcon = { Text(text = "    +972  ", style = MaterialTheme.typography.body2.copy(MaterialTheme.colors.textPrimaryColor))},
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone, imeAction = action),
         keyboardActions = KeyboardActions(
             onNext = { focusManager.moveFocus(FocusDirection.Down) },

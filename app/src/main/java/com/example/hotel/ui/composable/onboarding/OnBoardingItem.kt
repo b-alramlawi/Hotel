@@ -30,7 +30,7 @@ fun OnBoardingItem(page: Page){
     Column(verticalArrangement = Arrangement.spacedBy(spacingHuge)) {
         Box(modifier = Modifier
             .fillMaxWidth()
-            .fillMaxHeight(0.45f)
+            .fillMaxHeight(0.50f)
         ){
             Image(
                 painter = painterResource(id = page.image),
