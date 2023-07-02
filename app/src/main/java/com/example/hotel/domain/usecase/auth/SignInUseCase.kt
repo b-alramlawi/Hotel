@@ -16,6 +16,7 @@ class SignInUseCase @Inject constructor(
     suspend operator fun invoke(params: ParamSignInDto): Boolean {
         val response = repository.signIn(params)
         repository.storeToken(response.data!!.token)
+        repository.storeUserId(response.data.user.id.toString())
         return true
     }
 }

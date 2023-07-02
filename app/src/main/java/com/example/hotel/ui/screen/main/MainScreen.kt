@@ -34,12 +34,7 @@ fun MainScreen(
     val topBarList = listOf(
         TopBarItem(
             title = stringResource(id = R.string.app_name),
-            actions = arrayListOf(
-                Action(
-                    icon = R.drawable.bookmark_light,
-                    onClick = {navController.navigateToBookMark()}
-                )
-            )
+            actions = arrayListOf()
         ),
         TopBarItem(
             title = stringResource(id = R.string.my_booking),
@@ -51,7 +46,7 @@ fun MainScreen(
             )
         ),
         TopBarItem(
-            title = stringResource(id = R.string.chat),
+            title = stringResource(id = R.string.book_mark),
             actions = arrayListOf()
         ),
         TopBarItem(
@@ -92,10 +87,10 @@ fun MainScreen(
                         iconSelected = painterResource(R.drawable.document_bold),
                     ),
                     BottomNavItem(
-                        name = stringResource(id = R.string.chat),
-                        route = MainRoute.Chat,
-                        icon = painterResource(R.drawable.chat_light),
-                        iconSelected = painterResource(R.drawable.chat_bold),
+                        name = stringResource(id = R.string.book_mark),
+                        route = MainRoute.BookMark,
+                        icon = painterResource(R.drawable.bookmark_light),
+                        iconSelected = painterResource(R.drawable.bookmark_bold),
                     ),
                     BottomNavItem(
                         name = stringResource(id = R.string.profile),

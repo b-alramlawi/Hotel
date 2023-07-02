@@ -15,8 +15,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import coil.compose.SubcomposeAsyncImage
 import com.example.hotel.R
 import com.example.hotel.domain.model.Hotel
+import com.example.hotel.domain.model.HotelDB
 import com.example.hotel.ui.theme.Shapes
 import com.example.hotel.ui.theme.star
 import com.example.hotel.ui.theme.textPrimaryColor
@@ -24,7 +26,7 @@ import com.example.hotel.ui.theme.textSecondaryColor
 
 
 @Composable
-fun GridHotelItem(modifier: Modifier = Modifier, hotel: Hotel) {
+fun GridHotelItem(modifier: Modifier = Modifier, hotel: HotelDB) {
     Card(
         modifier = modifier.width(120.dp),
         shape = RoundedCornerShape(16.dp),
@@ -37,8 +39,8 @@ fun GridHotelItem(modifier: Modifier = Modifier, hotel: Hotel) {
                 elevation = 0.dp,
                 modifier = Modifier.fillMaxWidth().height(100.dp)
             ) {
-                Image(
-                    painter = painterResource(id = hotel.image),
+                SubcomposeAsyncImage(
+                    model = "https://media.istockphoto.com/id/104731717/photo/luxury-resort.jpg?s=612x612&w=0&k=20&c=cODMSPbYyrn1FHake1xYz9M8r15iOfGz9Aosy9Db7mI=",
                     contentDescription = "hotel",
                     contentScale = ContentScale.Crop
                 )

@@ -18,7 +18,7 @@ import com.example.hotel.domain.model.Facility
 import com.example.hotel.ui.theme.textPrimaryColor
 
 @Composable
-fun FacilityItem(facility: Facility) {
+fun FacilityItem(facility: String) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
 //        SubcomposeAsyncImage(
 //            model = facility.image,
@@ -27,12 +27,12 @@ fun FacilityItem(facility: Facility) {
 //            loading = { CircularProgressIndicator() },
 //        )
         Image(
-            painter = painterResource(id = facility.image),
+            painter = painterResource(id = R.drawable.facility),
             contentDescription = "icon",
             modifier = Modifier.size(30.dp)
         )
         Text(
-            text = facility.name,
+            text = facility,
             style = MaterialTheme.typography.caption.copy(color = MaterialTheme.colors.textPrimaryColor)
         )
     }

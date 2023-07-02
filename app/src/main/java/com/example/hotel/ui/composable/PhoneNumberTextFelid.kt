@@ -24,7 +24,8 @@ import com.example.hotel.ui.theme.*
 fun PhoneNumberTextFiled(
     value: String,
     action: ImeAction = ImeAction.Next,
-    onValueChange: (value: String) -> Unit
+    onValueChange: (value: String) -> Unit,
+    label: String = stringResource(id = R.string.phone_number)
 ) {
     var isFocus by remember {
         mutableStateOf(false)
@@ -53,7 +54,7 @@ fun PhoneNumberTextFiled(
         shape = Shapes.medium,
         placeholder = {
             Text(
-                text = if(isFocus) "" else stringResource(id = R.string.phone_number),
+                text = if(isFocus) "" else label,
                 style = MaterialTheme.typography.body2.copy(
                     color = Gray500,
                     fontWeight = FontWeight.Normal

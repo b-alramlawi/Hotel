@@ -29,6 +29,8 @@ fun BookMarkScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
+    viewModel.getAllBookMark()
+
     BookMarkContent(
         state = state,
         onBackClick = {navController.popBackStack()}
@@ -41,7 +43,7 @@ private fun BookMarkContent(
     onBackClick: () -> Unit
 ) {
     Column(modifier = Modifier.background(color = MaterialTheme.colors.background).fillMaxSize()) {
-        DefaultAppBar(title = stringResource(id = R.string.book_mark), onBackClick = onBackClick)
+//        DefaultAppBar(title = stringResource(id = R.string.book_mark), onBackClick = onBackClick)
 
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),

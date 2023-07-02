@@ -5,6 +5,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.example.hotel.ui.screen.booking.bookingRoute
+import com.example.hotel.ui.screen.bookmark.bookMarkRoute
 import com.example.hotel.ui.screen.chat.chatRoute
 import com.example.hotel.ui.screen.home.homeRoute
 import com.example.hotel.ui.screen.profile.profileRoute
@@ -18,7 +19,7 @@ fun MainNavigationGraph(navController: NavHostController, rootNavController: Nav
     ) {
         homeRoute(rootNavController)
         bookingRoute(rootNavController)
-        chatRoute(rootNavController)
+        bookMarkRoute(rootNavController)
         profileRoute(rootNavController)
     }
 }
@@ -26,6 +27,6 @@ fun MainNavigationGraph(navController: NavHostController, rootNavController: Nav
 object MainRoute {
     const val Home = "home"
     const val Booking = "booking"
-    const val Chat = "chat"
+    const val BookMark = "book_mark"
     const val Profile = "profile"
 }

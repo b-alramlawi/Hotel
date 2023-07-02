@@ -20,7 +20,7 @@ import com.example.hotel.ui.theme.Shapes
 import com.example.hotel.ui.theme.textFifthColor
 
 @Composable
-fun RoundedRating(modifier: Modifier = Modifier, rate: Float){
+fun RoundedRating(modifier: Modifier = Modifier, rate: String){
     Card(
         shape = Shapes.large,
         backgroundColor = MaterialTheme.colors.primary,

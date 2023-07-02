@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.hotel.R
@@ -69,8 +70,8 @@ fun SignUpContent(
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
                 .padding(paddingValue),
-            verticalArrangement = Arrangement.SpaceAround
         ) {
+            Spacer(modifier = Modifier.weight(0.3f))
             Text(
                 modifier = Modifier.padding(
                     horizontal = horizontalSpacing,
@@ -79,6 +80,7 @@ fun SignUpContent(
                 text = stringResource(id = R.string.create_your_account),
                 style = MaterialTheme.typography.h1.copy(color = MaterialTheme.colors.textPrimaryColor)
             )
+            Spacer(modifier = Modifier.height(30.dp))
             Column(
                 modifier = Modifier.padding(
                     horizontal = horizontalSpacing,
@@ -106,22 +108,23 @@ fun SignUpContent(
                     onClick = { onSignUpClick(state.email, state.password) }
                 )
             }
-            Column(
-                verticalArrangement = Arrangement.spacedBy(spacingXMedium),
-                modifier = Modifier.padding(
-                    horizontal = horizontalSpacing,
-                    vertical = verticalSpacing
-                ),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                DividerWithText()
-                IconCustomButton(
-                    title = stringResource(id = R.string.sign_in_with_google),
-                    color = MaterialTheme.colors.background,
-                    icon = R.drawable.google,
-                    onClick = onGoogleClick
-                )
-            }
+            Spacer(modifier = Modifier.weight(1f))
+//            Column(
+//                verticalArrangement = Arrangement.spacedBy(spacingXMedium),
+//                modifier = Modifier.padding(
+//                    horizontal = horizontalSpacing,
+//                    vertical = verticalSpacing
+//                ),
+//                horizontalAlignment = Alignment.CenterHorizontally
+//            ) {
+//                DividerWithText()
+//                IconCustomButton(
+//                    title = stringResource(id = R.string.sign_in_with_google),
+//                    color = MaterialTheme.colors.background,
+//                    icon = R.drawable.google,
+//                    onClick = onGoogleClick
+//                )
+//            }
             Footer(
                 modifier = Modifier.padding(horizontal = horizontalSpacing),
                 message = stringResource(id = R.string.already_have_an_account),

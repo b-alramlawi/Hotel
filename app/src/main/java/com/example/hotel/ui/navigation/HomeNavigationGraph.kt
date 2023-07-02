@@ -4,6 +4,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigation
 import com.example.hotel.ui.screen.bookmark.bookMarkRoute
+import com.example.hotel.ui.screen.confirmbooking.confirmBookingRoute
+import com.example.hotel.ui.screen.editprofile.editProfileRoute
 import com.example.hotel.ui.screen.hoteldetails.ROUTE_HOTEL_DETAILS
 import com.example.hotel.ui.screen.hoteldetails.hotelDetailsRoute
 import com.example.hotel.ui.screen.search.searchRoute
@@ -18,5 +20,7 @@ fun NavGraphBuilder.homeNavigationGraph(
         hotelDetailsRoute(navController)
         bookMarkRoute(navController)
         searchRoute(navController)
+        confirmBookingRoute(navController)
+        editProfileRoute(navController)
     }
 }

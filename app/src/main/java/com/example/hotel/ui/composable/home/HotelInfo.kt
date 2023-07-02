@@ -24,7 +24,7 @@ import com.example.hotel.domain.model.Hotel
 import com.example.hotel.ui.theme.textFifthColor
 
 @Composable
-fun HotelInfo(modifier: Modifier = Modifier, hotel: Hotel){
+fun HotelInfo(modifier: Modifier = Modifier, hotel: com.example.hotel.data.remote.response.dto.home.Hotel){
     Column(
         modifier = modifier
     ) {
@@ -33,7 +33,7 @@ fun HotelInfo(modifier: Modifier = Modifier, hotel: Hotel){
             style = MaterialTheme.typography.h4.copy(MaterialTheme.colors.textFifthColor)
         )
         Text(
-            text = hotel.location,
+            text = hotel.Location.locationName,
             style = MaterialTheme.typography.body2.copy(
                 MaterialTheme.colors.textFifthColor,
                 fontWeight = FontWeight.Normal

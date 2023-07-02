@@ -50,7 +50,7 @@ fun SignInScreen(
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
                 .padding(padding),
-            verticalArrangement = Arrangement.SpaceAround
+//            verticalArrangement = Arrangement.SpaceAround
         ) {
             Text(
                 modifier = Modifier.padding(
@@ -60,6 +60,7 @@ fun SignInScreen(
                 text = stringResource(id = R.string.login_to_your_account),
                 style = MaterialTheme.typography.h1.copy(color = MaterialTheme.colors.textPrimaryColor)
             )
+            Spacer(modifier = Modifier.weight(0.3f))
             Column(
                 modifier = Modifier.padding(
                     horizontal = horizontalSpacing,
@@ -90,29 +91,30 @@ fun SignInScreen(
                         id = R.string.sign_in
                     ),
                     enabled = if (state.isLoading) false else viewModel.isSignInEnable(),
-                    onClick = { /*viewModel.onSignInClick()*/ }
+                    onClick = { viewModel.onSignInClick() /*navController.navigateToMain()*/}
                 )
                 CustomTextButton(
                     title = stringResource(id = R.string.forgot_password),
                     onClick = { viewModel.onForgetPasswordClick() }
                 )
             }
-            Column(
-                verticalArrangement = Arrangement.spacedBy(spacingXMedium),
-                modifier = Modifier.padding(
-                    horizontal = horizontalSpacing,
-                    vertical = verticalSpacing
-                ),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                DividerWithText()
-                IconCustomButton(
-                    title = stringResource(id = R.string.sign_in_with_google),
-                    color = MaterialTheme.colors.background,
-                    icon = R.drawable.google,
-                    onClick = {  }
-                )
-            }
+            Spacer(modifier = Modifier.weight(1f))
+//            Column(
+//                verticalArrangement = Arrangement.spacedBy(spacingXMedium),
+//                modifier = Modifier.padding(
+//                    horizontal = horizontalSpacing,
+//                    vertical = verticalSpacing
+//                ),
+//                horizontalAlignment = Alignment.CenterHorizontally
+//            ) {
+//                DividerWithText()
+//                IconCustomButton(
+//                    title = stringResource(id = R.string.sign_in_with_google),
+//                    color = MaterialTheme.colors.background,
+//                    icon = R.drawable.google,
+//                    onClick = {  }
+//                )
+//            }
             Footer(
                 modifier = Modifier.padding(horizontal = horizontalSpacing),
                 message = stringResource(id = R.string.dont_have_an_account),

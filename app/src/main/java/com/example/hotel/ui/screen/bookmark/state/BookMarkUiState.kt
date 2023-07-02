@@ -4,29 +4,12 @@ import com.example.hotel.R
 import com.example.hotel.domain.model.Booking
 import com.example.hotel.domain.model.BookingStatus
 import com.example.hotel.domain.model.Hotel
+import com.example.hotel.domain.model.HotelDB
 
 data class BookMarkUiState(
-    val bookMarks: ArrayList<Hotel> = arrayListOf(
-        Hotel(
-            R.drawable.hotel,
-            4.5f,
-            "Samer Hotel",
-            "Gaza",
-            50.9
-        ),
-        Hotel(
-            R.drawable.hotel,
-            4.5f,
-            "Samer Hotel",
-            "Gaza - Palestine",
-            50.9
-        ),
-        Hotel(
-            R.drawable.hotel,
-            4.5f,
-            "Samer Hotel",
-            "Gaza - Palestine",
-            50.9
-        )
-    )
+    val bookMarks: List<HotelDB> = arrayListOf(),
+    val isLoading: Boolean = false,
+    val isSuccess: Boolean = false,
+    val isFailed: Boolean = false,
+    val errorMessage: String = "",
 )

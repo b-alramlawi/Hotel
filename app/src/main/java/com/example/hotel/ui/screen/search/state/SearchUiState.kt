@@ -3,6 +3,11 @@ package com.example.hotel.ui.screen.search.state
 
 data class SearchUiState(
     val search: String = "",
+    val isLoading: Boolean = false,
+    val isSuccess: Boolean = false,
+    val isFailed: Boolean = false,
+    val errorMessage: String = "",
+    val filteredHotel: List<com.example.hotel.data.remote.response.dto.home.Hotel> = arrayListOf(),
     val recentlyList: ArrayList<String> = arrayListOf(
         "Palazzo Hotel",
         "Palazzo Hotel",
@@ -31,5 +36,5 @@ data class SearchUiState(
         "WiFi",
         "WiFi",
     ),
-    val selectedFacility: ArrayList<String> = arrayListOf()
+    val selectedFacility: ArrayList<String> = arrayListOf(),
 )

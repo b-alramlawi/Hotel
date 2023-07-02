@@ -81,14 +81,14 @@ fun SearchTextFiled(
                 contentDescription = "search"
             )
         },
-        trailingIcon = {
-            IconButton(onClick = onFilterClick) {
-                Icon(
-                    painter = painterResource(id = R.drawable.filter_light),
-                    contentDescription = "filter"
-                )
-            }
-        },
+//        trailingIcon = {
+//            IconButton(onClick = onFilterClick) {
+//                Icon(
+//                    painter = painterResource(id = R.drawable.filter_light),
+//                    contentDescription = "filter"
+//                )
+//            }
+//        },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Search),
         keyboardActions = KeyboardActions(
             onNext = { focusManager.moveFocus(FocusDirection.Down) },

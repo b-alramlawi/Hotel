@@ -8,13 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.hotel.data.remote.response.dto.home.HotelDto
 import com.example.hotel.domain.model.Hotel
 import com.example.hotel.ui.composable.home.HotelInfo
 import com.example.hotel.ui.composable.home.ImageWithShadow
 import com.example.hotel.ui.composable.home.RoundedRating
 
 @Composable
-fun HotelItem(hotel: Hotel, onClick: () -> Unit) {
+fun HotelItem(hotel: com.example.hotel.data.remote.response.dto.home.Hotel, onClick: () -> Unit) {
     Card(
         shape = RoundedCornerShape(36.dp),
         modifier = Modifier
@@ -23,7 +24,7 @@ fun HotelItem(hotel: Hotel, onClick: () -> Unit) {
             .clickable { onClick() }
     ) {
         Box {
-            ImageWithShadow(image = hotel.image)
+            ImageWithShadow(image = hotel.images)
             RoundedRating(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
