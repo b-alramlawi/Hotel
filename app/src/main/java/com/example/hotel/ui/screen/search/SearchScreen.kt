@@ -56,7 +56,7 @@ fun SearchScreen(
         onSelectFacilityChange = viewModel::onSelectFacilityChange,
         modalSheetState = modalSheetState,
         onApplyClick = {},
-        onHotelClick = { navController.navigateToHotelDetails(it) },
+        onHotelClick = {id, image-> navController.navigateToHotelDetails(id) },
         onCancelClick = { coroutineScope.launch { modalSheetState.hide() } },
     )
 }
@@ -68,7 +68,7 @@ fun SearchContent(
     onFilterClick: () -> Unit,
     onApplyClick: () -> Unit,
     onCancelClick: () -> Unit,
-    onHotelClick: (String) -> Unit,
+    onHotelClick: (String, String) -> Unit,
     onSearchChange: (String) -> Unit,
     onSelectCountryChange: (String) -> Unit,
     onSelectSortChange: (String) -> Unit,
@@ -120,7 +120,7 @@ fun SearchContent(
                     items(state.filteredHotel) {
                         LinearHotelItem(
                             hotel = it,
-                            onClick = { onHotelClick(it.id.toString()) },
+                            onClick = { onHotelClick(it.id.toString(), it.images) },
                             onBookMarkClick = {},
 //                            isSaved = false
                         )

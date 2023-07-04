@@ -27,8 +27,10 @@ fun NavGraphBuilder.hotelDetailsRoute(navController: NavController) {
 
 class HotelDetailsScreenArgs(savedStateHandle: SavedStateHandle) {
     val id: String? = savedStateHandle[ID]
+    val image: String? = savedStateHandle[IMAGE]
 
     companion object {
         const val ID = "id"
+        const val IMAGE = "image"
     }
 }

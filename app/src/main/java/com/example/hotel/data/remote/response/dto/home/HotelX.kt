@@ -15,7 +15,7 @@ data class HotelX(
     @SerializedName("id")
     val id: Int,
     @SerializedName("images")
-    val images: List<String>,
+    var images: List<String>,
     @SerializedName("Location")
     val location: LocationX,
     @SerializedName("location_id")

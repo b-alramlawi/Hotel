@@ -8,7 +8,7 @@ data class Hotel(
     @SerializedName("id")
     val id: Int,
     @SerializedName("images")
-    val images: String,
+    var images: String,
     @SerializedName("name")
     val name: String,
     @SerializedName("price")

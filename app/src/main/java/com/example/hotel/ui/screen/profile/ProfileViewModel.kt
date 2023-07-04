@@ -56,7 +56,7 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getUserId(): String? {
+    suspend fun getUserId(): String? {
         val preferences = dataStore.data.first()
         return preferences[stringPreferencesKey(USER_ID)]
     }

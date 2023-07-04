@@ -107,12 +107,12 @@ fun HomeScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = stringResource(id = R.string.recently_booked),
+                        text = "All",
                         style = MaterialTheme.typography.h6.copy(color = MaterialTheme.colors.textPrimaryColor)
                     )
-                    CustomTextButton(title = stringResource(id = R.string.see_all),
-                        onClick = {}
-                    )
+//                    CustomTextButton(title = stringResource(id = R.string.see_all),
+//                        onClick = {}
+//                    )
                 }
 
                 repeat(state.hotels2.size) { hotel ->
